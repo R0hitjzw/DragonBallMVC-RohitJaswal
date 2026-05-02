@@ -1,0 +1,69 @@
+﻿@model IEnumerable<DragonBallMVC.Models.Favorite>
+
+@{
+    ViewData["Title"] = "Mis Favoritos";
+}
+
+<div class="container py-4">
+    <div class="text-center mb-4">
+        <h1 class="hero-title">⭐ Mis Favoritos</h1>
+        <p class="hero-subtitle">Personajes que has guardado</p>
+    </div>
+
+    @if (!Model.Any())
+    {
+        <div class="text-center py-5">
+            <div style="font-size:4rem;">🐉</div>
+            <p style="color:var(--db-muted); margin-top:1rem; font-size:1.1rem;">
+                No tienes favoritos todavía.<br />
+                <a asp-controller="Characters" asp-action="Index" class="btn-db mt-3" style="display:inline-block;">
+                    Explorar personajes
+                </a>
+            </p>
+        </div>
+    }
+    else
+    {
+        <div class="row g-3">
+            @foreach (var fav in Model)
+            {
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="card-char">
+                        @if (!string.IsNullOrEmpty(fav.CharacterImage))
+                        {
+                            <img src="@fav.CharacterImage" alt="@fav.CharacterName" loading="lazy" />
+                        }
+                        else
+                        {
+                            <div class="card-char-placeholder">🐉</div>
+                        }
+                        <div class="card-body">
+                            <h5 class="card-title">@fav.CharacterName</h5>
+                            <span class="badge-race">@fav.CharacterRace</span>
+                            <div class="mt-1">
+                                <small style="color:var(--db-muted)">
+                                    Añadido: @fav.AddedAt.ToString("dd/MM/yyyy")
+                                </small>
+                            </div>
+                            <div class="mt-2 d-flex gap-2">
+                                <a asp-controller="Characters" asp-action="Detail"
+                                   asp-route-id="@fav.CharacterId"
+                                   class="btn-db" style="font-size:0.8rem; padding:5px 12px;">
+                                    Ver
+                                </a>
+                                <form asp-controller="Favorites" asp-action="Remove"
+                                      asp-route-id="@fav.Id" method="post" style="margin:0;">
+                                    @Html.AntiForgeryToken()
+                                    <button type="submit" class="btn-db-outline"
+                                            style="font-size:0.8rem; padding:5px 12px; color:#cc3300; border-color:#cc3300;">
+                                        🗑 Quitar
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>

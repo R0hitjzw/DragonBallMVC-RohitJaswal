@@ -1,0 +1,83 @@
+@model DragonBallMVC.Models.Character
+
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+<div class="container py-4">
+    <div class="mb-3">
+        <a asp-action="Index" class="btn-db-outline">← Volver</a>
+    </div>
+
+    <div class="detail-panel">
+        <div class="row g-4">
+            <div class="col-md-4 text-center">
+                @if (!string.IsNullOrEmpty(Model.Image))
+                {
+                    <img src="@Model.Image" alt="@Model.Name" class="detail-img" />
+                }
+                else
+                {
+                    <div class="card-char-placeholder" style="border-radius:12px; height:380px; font-size:5rem;">🐉</div>
+                }
+            </div>
+
+            <div class="col-md-8">
+                <h1 class="detail-name">@Model.Name</h1>
+                <div class="mb-3">
+                    <span class="badge-race me-2">@Model.Race</span>
+                    @if (!string.IsNullOrEmpty(Model.Affiliation))
+                    {
+                        <span class="badge-affiliation">@Model.Affiliation</span>
+                    }
+                </div>
+
+                @if (!string.IsNullOrEmpty(Model.Description))
+                {
+                    <p style="color:var(--db-text); line-height:1.7; margin-bottom:1.5rem;">@Model.Description</p>
+                }
+
+                <div class="ki-bar-wrap">
+                    <div class="ki-bar-label">Ki Power</div>
+                    <div class="ki-bar">
+                        <div class="ki-bar-fill"></div>
+                    </div>
+                </div>
+
+                <div class="mt-3">
+                    <div class="stat-row">
+                        <span class="stat-label">Género</span>
+                        <span class="stat-value">@Model.Gender</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">Ki</span>
+                        <span class="stat-value" style="color:var(--db-orange)">@Model.Ki</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">Ki Máximo</span>
+                        <span class="stat-value" style="color:var(--db-yellow)">@Model.MaxKi</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">Raza</span>
+                        <span class="stat-value">@Model.Race</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">Afiliación</span>
+                        <span class="stat-value">@Model.Affiliation</span>
+                    </div>
+
+                    <div class="mt-4">
+                        <form asp-controller="Favorites" asp-action="Add" method="post">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="characterId" value="@Model.Id" />
+                            <input type="hidden" name="characterName" value="@Model.Name" />
+                            <input type="hidden" name="characterImage" value="@Model.Image" />
+                            <input type="hidden" name="characterRace" value="@Model.Race" />
+                            <button type="submit" class="btn-db">⭐ Añadir a favoritos</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

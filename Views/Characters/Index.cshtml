@@ -1,0 +1,82 @@
+﻿@model IEnumerable<DragonBallMVC.Models.Character>
+
+@{
+    ViewData["Title"] = "Personajes Dragon Ball";
+    int currentPage = ViewBag.CurrentPage;
+    int totalPages = ViewBag.TotalPages;
+}
+
+<div class="container py-4">
+    <div class="text-center mb-4">
+        <h1 class="hero-title">Dragon Ball — Personajes</h1>
+        <p class="hero-subtitle">Explora todos los personajes del universo Dragon Ball</p>
+    </div>
+
+    <div class="mb-4 d-flex justify-content-center">
+        <input type="text" id="searchInput" placeholder="🔍 Buscar personaje..."
+               class="db-search" oninput="filterCards()" aria-label="Buscar personaje" />
+    </div>
+
+    <div class="row g-3" id="cardsContainer">
+        @foreach (var c in Model)
+        {
+            <div class="col-6 col-md-4 col-lg-3 card-item">
+                <div class="card-char">
+                    @if (!string.IsNullOrEmpty(c.Image))
+                    {
+                        <img src="@c.Image" alt="@c.Name" loading="lazy" />
+                    }
+                    else
+                    {
+                        <div class="card-char-placeholder">🐉</div>
+                    }
+                    <div class="card-body">
+                        <h5 class="card-title">@c.Name</h5>
+                        <span class="badge-race">@c.Race</span>
+                        <div class="mt-1">
+                            <small style="color:var(--db-muted)">Ki: @c.Ki</small>
+                        </div>
+                        <div class="mt-2">
+                            <a asp-action="Detail" asp-route-id="@c.Id" class="btn-db" style="font-size:0.8rem; padding:5px 14px;">Ver detalle</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    <nav aria-label="Paginación" class="mt-4 d-flex justify-content-center">
+        <ul class="pagination">
+            @if (currentPage > 1)
+            {
+                <li class="page-item">
+                    <a class="page-link" asp-action="Index" asp-route-page="@(currentPage - 1)">«</a>
+                </li>
+            }
+            @for (int i = Math.Max(1, currentPage - 2); i <= Math.Min(totalPages, currentPage + 2); i++)
+            {
+                <li class="page-item @(i == currentPage ? "active" : string.Empty)">
+                    <a class="page-link" asp-action="Index" asp-route-page="@i">@i</a>
+                </li>
+            }
+            @if (currentPage < totalPages)
+            {
+                <li class="page-item">
+                    <a class="page-link" asp-action="Index" asp-route-page="@(currentPage + 1)">»</a>
+                </li>
+            }
+        </ul>
+    </nav>
+</div>
+
+@section Scripts {
+<script>
+    function filterCards() {
+        const q = document.getElementById('searchInput').value.toLowerCase();
+        document.querySelectorAll('.card-item').forEach(card => {
+            const name = card.querySelector('.card-title').textContent.toLowerCase();
+            card.style.display = name.includes(q) ? '' : 'none';
+        });
+    }
+</script>
+}

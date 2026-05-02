@@ -1,0 +1,337 @@
+/* ===== DRAGON BALL MVC — GLOBAL STYLES ===== */
+@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Rajdhani:wght@400;600;700&display=swap');
+
+:root {
+  --db-orange: #ff6f00;
+  --db-yellow: #ffd600;
+  --db-dark: #0a0a0f;
+  --db-card: #12121f;
+  --db-card2: #1a1a2e;
+  --db-border: rgba(255,111,0,0.35);
+  --db-glow: rgba(255,111,0,0.5);
+  --db-text: #e8e8f0;
+  --db-muted: #888;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  font-size: 16px;
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  background-color: var(--db-dark);
+  background-image:
+    radial-gradient(ellipse at 20% 50%, rgba(255,111,0,0.06) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 10%, rgba(255,214,0,0.05) 0%, transparent 50%);
+  color: var(--db-text);
+  font-family: 'Rajdhani', sans-serif;
+  margin-bottom: 80px;
+}
+
+/* ===== NAVBAR ===== */
+.db-navbar {
+  background: rgba(10,10,15,0.95);
+  border-bottom: 2px solid var(--db-orange);
+  box-shadow: 0 2px 20px var(--db-glow);
+  backdrop-filter: blur(8px);
+  padding: 0.5rem 0;
+}
+
+.db-navbar .navbar-brand {
+  font-family: 'Bangers', cursive;
+  font-size: 1.8rem;
+  letter-spacing: 3px;
+  color: var(--db-orange) !important;
+  text-shadow: 0 0 15px var(--db-glow);
+  text-decoration: none;
+}
+
+.db-navbar .nav-link {
+  color: var(--db-text) !important;
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: 1px;
+  padding: 0.4rem 1rem !important;
+  border-radius: 20px;
+  transition: all 0.2s;
+  text-transform: uppercase;
+}
+
+.db-navbar .nav-link:hover {
+  color: var(--db-yellow) !important;
+  background: rgba(255,111,0,0.15);
+}
+
+.db-navbar .navbar-toggler {
+  border-color: var(--db-orange);
+}
+.db-navbar .navbar-toggler-icon {
+  filter: invert(60%) sepia(100%) saturate(500%) hue-rotate(0deg);
+}
+
+/* ===== FOOTER ===== */
+.db-footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background: rgba(10,10,15,0.95);
+  border-top: 2px solid var(--db-border);
+  color: var(--db-muted);
+  font-size: 0.85rem;
+  line-height: 50px;
+  text-align: center;
+}
+.db-footer a { color: var(--db-orange); text-decoration: none; }
+.db-footer a:hover { color: var(--db-yellow); }
+
+/* ===== HERO TITLE ===== */
+.hero-title {
+  font-family: 'Bangers', cursive;
+  font-size: 3.5rem;
+  letter-spacing: 4px;
+  color: var(--db-orange);
+  text-shadow: 0 0 30px var(--db-glow), 0 0 60px rgba(255,111,0,0.2);
+  margin-bottom: 0.25rem;
+}
+
+.hero-subtitle {
+  color: var(--db-muted);
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+}
+
+/* ===== SEARCH BAR ===== */
+.db-search {
+  background: var(--db-card2);
+  border: 1px solid var(--db-border);
+  color: var(--db-text);
+  border-radius: 25px;
+  padding: 10px 20px;
+  width: 100%;
+  max-width: 420px;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.db-search:focus {
+  border-color: var(--db-orange);
+  box-shadow: 0 0 12px var(--db-glow);
+  outline: none;
+  background: var(--db-card2);
+  color: var(--db-text);
+}
+.db-search::placeholder { color: var(--db-muted); }
+
+/* ===== CHARACTER CARDS ===== */
+.card-char {
+  background: var(--db-card);
+  border: 1px solid var(--db-border);
+  border-radius: 14px;
+  overflow: hidden;
+  transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+  height: 100%;
+  cursor: pointer;
+}
+.card-char:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 40px var(--db-glow);
+  border-color: var(--db-orange);
+}
+.card-char img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  object-position: top;
+  display: block;
+}
+.card-char-placeholder {
+  height: 220px;
+  background: #111;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3.5rem;
+}
+.card-char .card-body { padding: 1rem; }
+.card-char .card-title {
+  color: var(--db-yellow);
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-bottom: 0.4rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ===== BADGES ===== */
+.badge-race {
+  background: var(--db-orange);
+  color: #fff;
+  border-radius: 20px;
+  padding: 2px 10px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  display: inline-block;
+}
+.badge-affiliation {
+  background: rgba(255,214,0,0.15);
+  color: var(--db-yellow);
+  border: 1px solid rgba(255,214,0,0.4);
+  border-radius: 20px;
+  padding: 2px 10px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  display: inline-block;
+}
+
+/* ===== BUTTONS ===== */
+.btn-db {
+  background: var(--db-orange);
+  color: #fff;
+  border: none;
+  border-radius: 25px;
+  padding: 7px 20px;
+  font-weight: 700;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-decoration: none;
+  display: inline-block;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+}
+.btn-db:hover {
+  background: var(--db-yellow);
+  color: #000;
+  box-shadow: 0 4px 16px rgba(255,214,0,0.4);
+  text-decoration: none;
+}
+.btn-db-outline {
+  background: transparent;
+  color: var(--db-orange);
+  border: 2px solid var(--db-orange);
+  border-radius: 25px;
+  padding: 6px 18px;
+  font-weight: 700;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-decoration: none;
+  display: inline-block;
+  transition: all 0.2s;
+}
+.btn-db-outline:hover {
+  background: var(--db-orange);
+  color: #fff;
+  text-decoration: none;
+}
+
+/* ===== PAGINATION ===== */
+.pagination .page-link {
+  background: var(--db-card2);
+  border-color: var(--db-border);
+  color: var(--db-orange);
+  font-weight: 600;
+}
+.pagination .page-item.active .page-link {
+  background: var(--db-orange);
+  border-color: var(--db-orange);
+  color: #fff;
+}
+.pagination .page-link:hover {
+  background: var(--db-orange);
+  color: #fff;
+  border-color: var(--db-orange);
+}
+
+/* ===== DETAIL PAGE ===== */
+.detail-panel {
+  background: var(--db-card);
+  border: 1px solid var(--db-border);
+  border-radius: 16px;
+  padding: 2rem;
+}
+.detail-img {
+  border-radius: 12px;
+  border: 2px solid var(--db-border);
+  max-height: 420px;
+  width: 100%;
+  object-fit: cover;
+  object-position: top;
+}
+.detail-name {
+  font-family: 'Bangers', cursive;
+  font-size: 3rem;
+  letter-spacing: 3px;
+  color: var(--db-orange);
+  text-shadow: 0 0 20px var(--db-glow);
+}
+.ki-bar-wrap { margin: 0.5rem 0; }
+.ki-bar-label {
+  font-size: 0.85rem;
+  color: var(--db-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 3px;
+}
+.ki-bar {
+  height: 8px;
+  background: rgba(255,111,0,0.15);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.ki-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--db-orange), var(--db-yellow));
+  border-radius: 10px;
+  width: 75%;
+  box-shadow: 0 0 8px var(--db-glow);
+}
+.stat-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  font-size: 1rem;
+}
+.stat-row:last-child { border-bottom: none; }
+.stat-row .stat-label { color: var(--db-muted); font-weight: 600; text-transform: uppercase; font-size: 0.85rem; }
+.stat-row .stat-value { color: var(--db-text); font-weight: 700; }
+
+/* ===== HOME PAGE ===== */
+.home-hero {
+  min-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 3rem 1rem;
+}
+.home-hero .dragon-ball-icon {
+  font-size: 5rem;
+  filter: drop-shadow(0 0 20px var(--db-glow));
+  animation: float 3s ease-in-out infinite;
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+.home-tagline {
+  font-size: 1.2rem;
+  color: var(--db-muted);
+  max-width: 500px;
+  margin: 1rem auto 2rem;
+  line-height: 1.6;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 576px) {
+  .hero-title { font-size: 2.2rem; }
+  .detail-name { font-size: 2rem; }
+}
